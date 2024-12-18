@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Positive Initiative</title>
+    <style>
+        :root {
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --transition: 0.3s ease;
+            --light-bg: #F5F5F5;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Verdana, Geneva, Tahoma, sans-serif
+        }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #95D600;
+            border-radius: 10px;
+        }
+
+        body {
+            font-family: Verdana , sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+
+        .container {
+            max-width: 1185px;
+            margin: 0 auto;
+            padding: 5px;
+        }
+
+        /* Header Styles */
+        header {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background: white;
+            padding: 1.1rem ;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: black;
+            margin-top: -23px;
+
+        }
+
+
+        .logo span.highlight {
+            color: #95D600;
+            margin-left: 178px;
+        }
+        .logo span.margin{
+            margin-left: 150px;
+            color: black;
+        }
+        .logo span.pos{
+            margin-left: -32px;
+        }
+
+
+        .logo img {
+            height: 90px;
+            margin-bottom:-70px;
+            margin-right: 35px;
+        }
+
+        #menu-btn,
+        #mobile-nav-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        #mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            padding: 2rem;
+            transition: right var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        #mobile-nav.active {
+            right: 0;
+        }
+
+        #mobile-nav ul {
+            list-style: none;
+            margin-top: 3rem;
+        }
+
+        #mobile-nav a {
+            display: block;
+            padding: 1rem 0;
+            text-decoration: none;
+            color: black;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 2rem;
+            background: linear-gradient(to right, rgba(241, 241, 241, 0.9), rgba(255,255,255,0.7));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 500px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 60%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.05);
+        }
+
+        .accent {
+            color: #c4d600;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #c4d600;
+            color: black;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button:hover {
+            background: #a8b800;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(196,214,0,0.3);
+        }
+
+        .about {
+            padding: 4rem 2rem;
+            background: #f5f5f5;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 2rem;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: #95D600;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;}
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }}
+
+        .animate-in {
+            animation: fadeInUp 1s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="ecot.html" class="logo">
+                <img src="images\pexels-1609538911-29206213.jpg" alt="Nature Positive Logo">
+                <span class="pos"><strong>POSITIVE</strong></span><br/>
+                <span class="highlight"><i>ECO</i></span><br/>
+                <span class="margin"><strong>TOURISM</strong></span>
+            </a>
+            <button id="menu-btn" aria-label="Open menu">MENU ☰</button>
+
+            <nav id="mobile-nav" aria-label="Main navigation">
+                <button id="mobile-nav-close" aria-label="Close menu">×</button>
+                <ul>
+                    <li><a href="HOME.html">HOME</a></li>
+                    <li><a href="metrics.html">STATE OF NATURE METRICS</a></li>
+                    <li><a href="about.html">ABOUT US</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content hidden">
+            <h1>A GLOBAL GOAL FOR <span class="accent">NATURE</span></h1>
+            <h2>Nature Positive by 2030</h2>
+            <a href="initiative.html" class="button">INITIATIVE</a>
+        </div>
+        <img src="images\pexels-shvetsa-5231183.jpg" alt="a big farm" class="hero-image hidden">
+    </section>
+
+    <section class="about">
+        <div class="about-content hidden">
+            <h2>About the Nature Positive Initiative</h2>
+            <p>Nature is in crisis…
+                placing human and planetary health at risk. This decade must be the turning point where we recognize the value of nature, place it on the path to recovery and transform our world to one where people, economies and nature thrive.
+                
+                That’s why the world is coming together behind a global goal for nature. A goal to become nature-positive by 2030</p>
+            <a href="#" class="button">SEE MORE</a>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="copyright">
+            <p>Copyright © 2024 Nature Positive</p>
+            <p>The Nature Positive Initiative is a project of Rockefeller Philanthropy Advisors</p>
+        </div>
+        <div class="social-links">
+            <a href="#" class="social-icon">in</a>
+            <a href="#" class="social-icon">X</a>
+            <a href="#" class="social-icon">YT</a>
+        </div>
+    </footer>
+    <div class="audio-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+        <audio id="backgroundMusic" loop>
+            <source src="media/videoplayback.m4a" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <button id="audioControl" style="background: #95D600; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+            <span id="audioIcon" style="color: white;">▶</span>
+        </button>
+    </div>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        const closeBtn = document.getElementById('mobile-nav-close');
+
+        menuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+        });
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll <= 0) {
+                header.style.transform = 'translateY(0)';
+                return;
+            }
+
+            if (currentScroll > lastScroll) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
+        });
+
+        // Animation au défilement
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
+
+        // Header avec ombre au défilement
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Animation des boutons
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('mouseover', function(e) {
+                const x = e.pageX - this.offsetLeft;
+                const y = e.pageY - this.offsetTop;
+                
+                this.style.setProperty('--xPos', x + 'px');
+                this.style.setProperty('--yPos', y + 'px');
+            });
+        });
+        const audio = document.getElementById('backgroundMusic');
+        const audioControl = document.getElementById('audioControl');
+        const audioIcon = document.getElementById('audioIcon');
+
+        audioControl.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            audioIcon.textContent = '⏸';
+        } else {
+            audio.pause();
+            audioIcon.textContent = '▶';
+        }
+        });
+    </script>
+</body>
+</html>

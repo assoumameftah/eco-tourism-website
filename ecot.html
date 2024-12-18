@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éco-Tourisme & Nature Positive</title>
+    <style>
+        :root {
+            --primary-green: #95D600;
+            --dark-text: #333333;
+            --light-bg: #F5F5F5;
+            --transition: 0.3s ease;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        * {
+            margin:0;
+            padding: 6px;
+            box-sizing: border-box;
+        }
+                /* Ajout d'une scrollbar personnalisée */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-green);
+            border-radius: 10px;
+        }
+        body {
+            font-family: Verdana , sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background: white;
+            padding: 0.88rem ;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: black;
+            margin-top: -22px;
+            margin-bottom: 3px;
+        }
+
+
+        .logo span.highlight {
+            color: #95D600;
+            margin-left: 178px;
+            font-style: italic;
+        }
+        .logo span.margin{
+            margin-left: 138px;
+            color: black;
+        }
+        .logo span.pos{
+            margin-left: -35px;
+        }
+
+
+        .logo img {
+            height: 103px;
+            margin-bottom:-75px;
+            margin-right: 20px;
+        }
+
+        #menu-btn,
+        #mobile-nav-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        #mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            padding: 2rem;
+            transition: right var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        #mobile-nav.active {
+            right: 0;
+        }
+
+        #mobile-nav ul {
+            list-style: none;
+            margin-top: 3rem;
+        }
+
+        #mobile-nav a {
+            display: block;
+            padding: 1rem 0;
+            text-decoration: none;
+            color: black;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+
+        /* Nouveaux styles pour la galerie d'images */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+            background: var(--light-bg);
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 500px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* Style pour la section vidéo */
+        .video-section {
+            position: relative;
+            padding: 2rem;
+            background: #000;
+            color: whitesmoke;
+            text-align: center;
+        }
+
+        .video-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            position: relative;
+            padding-bottom: 70%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 30px;
+            box-shadow: 5px 10px 20px rgb(132, 216, 76);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Amélioration des cartes d'objectifs */
+        .goal-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .goal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-green);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .goal-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .goal-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Style pour les indicateurs de statistiques */
+        .stats-section {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+        .footer {
+            background: #444;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: #95D600;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+        /*nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero Sections */
+        .hero-eco {
+            height: 100vh;
+            background-image: url("images/pexels-amanda-von-imhof-538951102-16596947.jpg");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 2rem;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .hero-nature {
+            height: 100vh;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 10%;
+            color: white;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 600px;
+        }
+
+        .earth-image {
+            width: 50%;
+            border-radius: 50%;
+            animation: rotate 60s linear infinite;
+            box-shadow: 5px 10px 20px rgb(76, 137, 216);
+        }
+
+        /* Timeline Section */
+        .timeline {
+            background: var(--light-bg);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .timeline-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding: 1rem 0;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: linear-gradient(to right, #FFD700, var(--primary-green));
+            border-radius: 4px;
+            margin: 2rem 0;
+        }
+        /* Quote Section */
+        .quote-section {
+            padding: 4rem 10%;
+            background: #f5f5f5;
+        }
+
+        .quote {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .quote::before,
+        .quote::after {
+            content: '"';
+            color: var(--primary-green);
+            font-size: 4rem;
+            position: absolute;
+        }
+
+        .leaf-decoration {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 200px;
+            opacity: 0.8;
+        }
+        
+        header.scrolled {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .hero-nature {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 5%;
+            }
+            .hero-content,
+            .earth-image {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="ecot.html" class="logo">
+                <img src="images\pexels-1609538911-29206213.jpg" alt="Nature Positive Logo">
+                <span class="pos"><strong>POSITIVE</strong></span><br/>
+                <span class="highlight"><i>ECO</i></span><br/>
+                <span class="margin"><strong>TOURISM</strong></span>
+            </a>
+            <button id="menu-btn" aria-label="Open menu">MENU ☰</button>
+
+            <nav id="mobile-nav" aria-label="Main navigation">
+                <button id="mobile-nav-close" aria-label="Close menu">×</button>
+                <ul>
+                    <li><a href="HOME.html">HOME</a></li>
+                    <li><a href="metrics.html">STATE OF NATURE METRICS</a></li>
+                    <li><a href="about.html">ABOUT US</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="audio-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+        <audio id="backgroundMusic" loop>
+            <source src=media/videoplayback.m4a type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <button id="audioControl" style="background: #95D600; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+            <span id="audioIcon" style="color: white;">▶</span>
+        </button>
+    </div>
+
+    <main>
+        <section class="hero-eco">
+            <div class="hero-content">
+                <h1>Discover Tourism<span class="highlight">Positive</span></h1>
+                <p>Traveling responsibly to preserve and restore nature by 2030</p>
+            </div>
+        </section>
+
+        <section class="hero-nature">
+            <div class="hero-content">
+                <h1>Launch of the Nature Positive Initiative</h1>
+                <p>The Initiative launched on 6 September 2023, to promote the integrity and implementation of the Global Goal for Nature. 27 of the world's largest nature conservation organizations came together.</p>
+                <a href="initiative.html" class="cta-button">Find out about the initiative</a>
+            </div>
+            <img src="images\pexels-pixabay-87651.jpg" alt="Earth" class="earth-image">
+        </section>
+        <section class="image-gallery">
+            <div class="gallery-item" data-aos="fade-up">
+                <img src="images\pexels-mary-taylor-5896628.jpg"   alt="Éco-tourisme 1">
+                <div class="gallery-overlay">
+                    <h3>Discovery of Nature</h3>
+                    <p>Explore unspoiled landscapes</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                <img src="images\pexels-habeeb-sujan-2081552814-29290079.jpg" alt="Éco-tourisme 2">
+                <div class="gallery-overlay">
+                    <h3>Local communities</h3>
+                    <p>Meet and support local people</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                <img src="images\pexels-ecoviu-team-260500507-14279178.jpg" alt="Éco-tourisme 3">
+                <div class="gallery-overlay">
+                    <h3>Protection of Biodiversity</h3>
+                    <p>Participate in conservation projects</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="video-section" data-aos="fade-up">
+            <h2>Our Vision for Sustainable Tourism</h2>
+            <div class="video-container">
+                <video width="1000" height="1000" controls>
+                    <source src="media/5032640-uhd_4096_2160_30fps.mp4" type="video/mp4">
+                </video>
+
+            </div>
+        </section>
+        <section class="stats-section">
+            <div class="stats-container">
+                <div class="stat-card" data-aos="fade-up">
+                    <div class="stat-number" data-count="1000">0</div>
+                    <p>Responsible Travelers</p>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-number" data-count="50">0</div>
+                    <p>Ecological Projects</p>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-number" data-count="25">0</div>
+                    <p>Supported Communities</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="timeline">
+            <h2>Our Vision for the Future</h2>
+            <div class="timeline-container">
+                <div class="progress-bar"></div>
+                <div class="milestones">
+                    <div class="milestone">
+                        <h3>2020</h3>
+                        <p>Starting point</p>
+                    </div>
+                    <div class="milestone">
+                        <h3>2030</h3>
+                        <p>Positive inversion</p>
+                    </div>
+                    <div class="milestone">
+                        <h3>2050</h3>
+                        <p>Full recovery</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="quote-section">
+            <blockquote class="quote">
+                We are facing a triple planetary crisis – climate, nature, pollution. We need now to translate this into integrity and accountability to help us move more into a climate neutral, nature positive, and pollution-free world.
+            </blockquote>
+            <p class="author">Inger Andersen<br>Executive Director, United Nations Environment Programme</p>
+            <div class="gallery-item" data-aos="fade-up" >
+                <img src="images\pexels-hsapir-1054655.jpg" alt="Éco-tourisme 4"></div>
+        </section>
+
+        <section class="goals">
+            <div class="goals-grid">
+                <div class="goal-card">
+                    <h3>Responsible Tourism</h3>
+                    <p>Discover how to travel while respecting the environment and local communities.</p>
+                </div>
+                <div class="goal-card">
+                    <h3>Nature Protection</h3>
+                    <p>Participate in ecosystem conservation and restoration projects.</p>
+                </div>
+                <div class="goal-card">
+                    <h3>Local Impact</h3>
+                    <p>Support local communities and contribute to their sustainable development.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="copyright">
+            <p>Copyright © 2024 Nature Positive</p>
+            <p>The Nature Positive Initiative is a project of Rockefeller Philanthropy Advisors</p>
+        </div>
+        <div class="social-links">
+            <a href="#" class="social-icon">in</a>
+            <a href="#" class="social-icon">X</a>
+            <a href="#" class="social-icon">YT</a>
+        </div>
+    </footer>
+
+    <script>
+        const audio = document.getElementById('backgroundMusic');
+        const audioControl = document.getElementById('audioControl');
+        const audioIcon = document.getElementById('audioIcon');
+
+        audioControl.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                audioIcon.textContent = '⏸';
+            } else {
+                audio.pause();
+                audioIcon.textContent = '▶';
+            }
+        });
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        const closeBtn = document.getElementById('mobile-nav-close');
+
+        menuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+        });
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll <= 0) {
+                header.style.transform = 'translateY(0)';
+                return;
+            }
+
+            if (currentScroll > lastScroll) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
+        });
+        const observerOptions = {
+            threshold: 0.1
+        };
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+        const stats = document.querySelectorAll('.stat-number');
+        
+        stats.forEach(stat => {
+            const target = parseInt(stat.getAttribute('data-count'));
+            const duration = 2000; // 2 secondes
+            const step = target / (duration / 16); // 60 FPS
+            let current = 0;
+            
+            const updateCounter = () => {
+                current += step;
+                if (current < target) {
+                    stat.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    stat.textContent = target;
+                }
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    updateCounter();
+                    observer.unobserve(stat);
+                }
+            });
+            
+            observer.observe(stat);
+        });
+
+    </script>
+</body>
+</html>

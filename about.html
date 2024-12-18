@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Positive Initiative</title>
+    <style>
+        :root {
+            --primary-color: #9FD133;
+            --dark-color: #333;
+            --light-color: #f4f4f4;
+            --white: #ffffff;
+            --text-color: #444;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --transition: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #95D600;
+            border-radius: 10px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background: white;
+            padding: 0.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: black;
+            margin-top: -14px;
+        }
+
+
+        .logo span.highlight {
+            color: var(--primary-color);
+            margin-left: 170px;
+        }
+        .logo span.margin{
+            margin-left: 145px;
+            color: black;
+        }
+
+
+        .logo img {
+            height: 92px;
+            margin-bottom:-77px;
+        }
+
+        /*.logo-text {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-text span {
+            color: var(--primary-color);
+        }*/
+        #menu-btn,
+        #mobile-nav-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        #mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            padding: 2rem;
+            transition: right var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        #mobile-nav.active {
+            right: 0;
+        }
+
+        #mobile-nav ul {
+            list-style: none;
+            margin-top: 3rem;
+        }
+
+        #mobile-nav a {
+            display: block;
+            padding: 1rem 0;
+            text-decoration: none;
+            color: black;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Navigation */
+        /*nav {
+            display: flex;
+            gap: 2rem;
+        }*/
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 74px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/pexels-cottonbro-9291140.jpg");
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: var(--light-color);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding: 0 40px;
+        }
+
+        /* Info Section */
+        .info-section {
+            padding: 80px 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Table Section */
+        .table-section {
+            padding: 80px 0;
+            background: var(--light-color);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #8bc229;
+        }
+        .footer {
+            background: #444;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: transform var(--transition);
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .quote {
+                font-size: 1.2rem;
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="ecot.html" class="logo">
+                <img src="images\pexels-1609538911-29206213.jpg" alt="Nature Positive Logo">
+                <span><strong>POSITIVE</strong></span><br/>
+                <span class="highlight"><i>ECO</i></span><br/>
+                <span class="margin"><strong>TOURISM</strong></span>
+            </a>
+            <button id="menu-btn" aria-label="Open menu">MENU ☰</button>
+
+            <nav id="mobile-nav" aria-label="Main navigation">
+                <button id="mobile-nav-close" aria-label="Close menu">×</button>
+                <ul>
+                    <li><a href="HOME.html">HOME</a></li>
+                    <li><a href="metrics.html">STATE OF NATURE METRICS</a></li>
+                    <li><a href="about.html">ABOUT US</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>THE NATURE POSITIVE INITIATIVE</h1>
+                <p>Promoting the integrity and implementation of Nature Positive by 2030</p>
+                <a href="#learn-more" class="btn">Learn More</a>
+            </div>
+        </section>
+
+        <section class="quote-section">
+            <div class="container">
+                <div class="quote">
+                    "Nature positive is not a slogan – it is an ambitious goal and should not be used to imply something is green or nature-friendly. It refers to measurable outcomes that contribute to halting and reversing nature loss with significant benefits to society."
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="container">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h2>Our Mission</h2>
+                        <p>The Nature Positive Initiative is the second phase of work that commenced in 2019, with the development of nature positive by 2030 as the global goal for nature – its equivalent to the 1.5C goal that exists for climate.</p>
+                    </div>
+                    <div class="info-card">
+                        <img src="images\pexels-cottonbro-9290033.jpg" alt="Nature conservation" style="width: 100%; height: auto; border-radius: 5px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="table-section">
+            <div class="container">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Core Areas</th>
+                                <th>Description</th>
+                                <th>Key Objectives</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Integrity Preservation</td>
+                                <td>Preserving the integrity of 'Nature Positive' as a measurable 2030 global goal</td>
+                                <td>Establish clear metrics and guidelines for measurement</td>
+                            </tr>
+                            <tr>
+                                <td>Stakeholder Engagement</td>
+                                <td>Coordinating active engagement across business, government, and other stakeholders</td>
+                                <td>Build inclusive partnerships and coalitions</td>
+                            </tr>
+                            <tr>
+                                <td>Implementation Support</td>
+                                <td>Providing tools and guidance for nature positive outcomes</td>
+                                <td>Develop practical frameworks and resources</td>
+                            </tr>
+                            <tr>
+                                <td>Framework Implementation</td>
+                                <td>Supporting the Kunming-Montreal Global Biodiversity Framework</td>
+                                <td>Monitor and report on implementation progress</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="copyright">
+            <p>Copyright © 2024 Nature Positive</p>
+            <p>The Nature Positive Initiative is a project of Rockefeller Philanthropy Advisors</p>
+        </div>
+        <div class="social-links">
+            <a href="#" class="social-icon" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-icon" aria-label="Twitter">X</a>
+            <a href="#" class="social-icon" aria-label="YouTube">YT</a>
+        </div>
+    </footer>
+    <div class="audio-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+        <audio id="backgroundMusic" loop>
+            <source src="media/videoplayback.m4a" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <button id="audioControl" style="background: #95D600; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+            <span id="audioIcon" style="color: white;">▶</span>
+        </button>
+    </div>
+
+    <script>
+        // Smooth scroll for navigation links
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        const closeBtn = document.getElementById('mobile-nav-close');
+
+        menuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Fixed header scroll behavior
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll <= 0) {
+                header.style.transform = 'translateY(0)';
+                return;
+            }
+
+            if (currentScroll > lastScroll) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
+        });
+        const audio = document.getElementById('backgroundMusic');
+        const audioControl = document.getElementById('audioControl');
+        const audioIcon = document.getElementById('audioIcon');
+
+        audioControl.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            audioIcon.textContent = '⏸';
+        } else {
+            audio.pause();
+            audioIcon.textContent = '▶';
+        }
+        });
+    </script>
+</body>
+</html>
